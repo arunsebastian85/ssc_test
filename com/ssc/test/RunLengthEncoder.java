@@ -13,20 +13,24 @@ public class RunLengthEncoder {
 
         for (int i = 0; i < inputArray.length; ) {
             int count = 1;
+
             //append value if input ends without repeating char
             if (i == inputArray.length - 1) {
                 appendEncodedString(builder, count, inputArray[i]);
                 break;
             }
+
             for (int j = i + 1; j < inputArray.length; j++) {
                 if (inputArray[i].equalsIgnoreCase(inputArray[j])) {
                     count = count + 1;
+
                     //append value if stream reaches end of string
                     if (j == inputArray.length - 1) {
                         appendEncodedString(builder, count, inputArray[i]);
                         //this helps to break execution from outer loop
                         i = j + 1;
                     }
+
                 } else {
                     appendEncodedString(builder, count, inputArray[i]);
                     i = j;
@@ -38,7 +42,11 @@ public class RunLengthEncoder {
         return builder.toString();
     }
 
-    private static void appendEncodedString(StringBuilder builder, int count, String inputArray) {
+    private static void appendEncodedString(
+            final StringBuilder builder,
+            final int count,
+            final String inputArray
+    ) {
         builder.append(inputArray);
         builder.append(count);
     }
